@@ -1,10 +1,11 @@
 ﻿using Apontamento.Core.Domain.Enums;
 using Apontamento.Core.Messages;
+using Apontamento.Identidade.Domain.Entities;
 using FluentValidation;
 
 namespace Apontamento.Identidade.Domain.Commands.Identidade
 {
-    public class CadastrarUsuarioCommand : Command<bool>
+    public class CadastrarUsuarioCommand : Command<Usuario>
     {
         public CadastrarUsuarioCommand(string nome, Guid squadId, ETipoUsuario tipoUsuario)
         {
@@ -38,7 +39,7 @@ namespace Apontamento.Identidade.Domain.Commands.Identidade
                 .OverridePropertyName("ValidacaoNome");
 
             RuleFor(c => c.SquadId)
-                .NotEqual(Guid.Empty).WithMessage("O Id do squad não pode ser vazio.")
+                .NotEqual(Guid.Empty).WithMessage("O Id do squad não pode ser vazio")
                 .OverridePropertyName("ValidacaoSquadId"); 
         }
     }

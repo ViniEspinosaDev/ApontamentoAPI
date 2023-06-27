@@ -2,8 +2,9 @@
 {
     public enum ETipoUsuario
     {
-        Desenvolvedor = 0,
-        Agilista = 1,
-        Admin = 2
+        Nenhum = 0,
+        Desenvolvedor = 1,
+        Agilista = 2,
+        Administrador = 3
     }
 }

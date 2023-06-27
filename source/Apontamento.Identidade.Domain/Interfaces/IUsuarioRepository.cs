@@ -1,6 +1,10 @@
-﻿namespace Apontamento.Identidade.Domain.Interfaces
+﻿using Apontamento.Core.Data;
+using Apontamento.Identidade.Domain.Entities;
+
+namespace Apontamento.Identidade.Domain.Interfaces
 {
-    public class IUsuarioRepository
+    public interface IUsuarioRepository : IRepository<Usuario>
     {
+        void Adicionar(Usuario usuario);
     }
 }

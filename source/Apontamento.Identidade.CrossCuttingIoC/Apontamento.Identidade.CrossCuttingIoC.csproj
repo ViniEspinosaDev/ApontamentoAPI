@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Apontamento.Identidade.Domain\Apontamento.Identidade.Domain.csproj" />
+    <ProjectReference Include="..\Apontamento.Identidade.Infra\Apontamento.Identidade.Infra.csproj" />
   </ItemGroup>
 
 </Project>

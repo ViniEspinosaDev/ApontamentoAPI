@@ -1,0 +1,54 @@
+﻿using Apontamento.Core.API.Environment;
+using Apontamento.Core.Domain.Entities;
+using Apontamento.Core.Domain.Interfaces;
+using Apontamento.Core.Domain.Models;
+using System.Net;
+using System.Net.Mail;
+
+namespace Apontamento.Core.Domain.Services
+{
+    public class MailService : IMailService
+    {
+        private MailConfiguration _mailConfiguration;
+
+        public MailService(IEnvironment environment)
+        {
+            _mailConfiguration = environment.ConfiguracaoEmail;
+        }
+
+        public void OverrideMailConfiguration(MailConfiguration mailConfiguration)
+        {
+            _mailConfiguration = mailConfiguration;
+        }
+
+        public async Task SendMailAsync(Mail destiny)
+        {
+            using SmtpClient smtpClient = new SmtpClient(_mailConfiguration.SMTP, _mailConfiguration.Port)
+            {
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(_mailConfiguration.Address, _mailConfiguration.Password),
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                EnableSsl = _mailConfiguration.UseSsl,
+            };
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+            var destino = destiny.MailAddress;
+
+            MailMessage mail = new MailMessage(_mailConfiguration.Address, destino)
+            {
+                Subject = destiny.Subject,
+                IsBodyHtml = true,
+                Body = destiny.BodyText
+            };
+
+            if (destiny.Attachments != null)
+            {
+                foreach (var attachment in destiny.Attachments)
+                    mail.Attachments.Add(attachment);
+            }
+
+            await smtpClient.SendMailAsync(mail);
+        }
+    }
+}
