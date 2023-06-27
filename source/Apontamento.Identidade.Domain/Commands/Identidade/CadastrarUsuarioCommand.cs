@@ -7,16 +7,18 @@ namespace Apontamento.Identidade.Domain.Commands.Identidade
 {
     public class CadastrarUsuarioCommand : Command<Usuario>
     {
-        public CadastrarUsuarioCommand(string nome, Guid squadId, ETipoUsuario tipoUsuario)
+        public CadastrarUsuarioCommand(string nome, Guid squadId, ETipoUsuario tipoUsuario, string email)
         {
             Nome = nome;
             SquadId = squadId;
             TipoUsuario = tipoUsuario;
+            Email = email;
         }
 
         public string Nome { get; protected set; }
         public Guid SquadId { get; protected set; }
         public ETipoUsuario TipoUsuario { get; protected set; }
+        public string Email { get; protected set; }
 
         public override bool IsValid()
         {
@@ -40,7 +42,11 @@ namespace Apontamento.Identidade.Domain.Commands.Identidade
 
             RuleFor(c => c.SquadId)
                 .NotEqual(Guid.Empty).WithMessage("O Id do squad não pode ser vazio")
-                .OverridePropertyName("ValidacaoSquadId"); 
+                .OverridePropertyName("ValidacaoSquadId");
+
+            RuleFor(c => c.Email)
+                .EmailAddress().WithMessage("O e-mail não é válido")
+                .OverridePropertyName("ValidacaoEmail");
         }
     }
 }

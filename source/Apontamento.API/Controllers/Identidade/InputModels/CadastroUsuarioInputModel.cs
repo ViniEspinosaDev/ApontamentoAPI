@@ -2,8 +2,9 @@
 {
     public class CadastroUsuarioInputModel
     {
-        public string Nome { get; protected set; }
-        public string Squad { get; protected set; }
-        public int TipoUsuario { get; protected set; }
+        public string Nome { get; set; }
+        public string Squad { get; set; }
+        public int TipoUsuario { get; set; }
+        public string Email { get; set; }
     }
 }

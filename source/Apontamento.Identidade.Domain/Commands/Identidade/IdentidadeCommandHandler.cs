@@ -34,7 +34,8 @@ namespace Apontamento.Identidade.Domain.Commands.Identidade
                 nome: request.Nome,
                 squadId: request.SquadId,
                 tipo: request.TipoUsuario,
-                senha: HashPassword.GenerateSHA512String(senha));
+                senha: HashPassword.GenerateSHA512String(senha),
+                email: request.Email);
 
             _usuarioRepository.Adicionar(usuario);
 
