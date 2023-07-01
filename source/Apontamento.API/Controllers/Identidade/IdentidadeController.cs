@@ -47,14 +47,16 @@ namespace Apontamento.API.Controllers.Identidade
             return CustomResponse(mensagem);
         }
 
-        // TODO: Remover o AllowAnounymous
-        [AllowAnonymous]
         [HttpPut("resetar-senha")]
         public async Task<ActionResult> ResetarSenha(ResetarSenhaInputModel resetarSenhaInputModel)
         {
-            // Resetar flag na tabela de Usuário (PrimeiroLogin = true | Senha = Padrão)
+            resetarSenhaInputModel.UsuarioId = UsuarioLogadoId;
 
-            return CustomResponse();
+            var comando = _mapper.Map<ResetarSenhaCommand>(resetarSenhaInputModel);
+
+            var usuario = await _mediatorHandler.SendCommand(comando);
+
+            return CustomResponse("Senha resetada com sucesso.");
         }
     }
 }

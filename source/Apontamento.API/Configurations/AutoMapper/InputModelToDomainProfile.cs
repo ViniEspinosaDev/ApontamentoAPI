@@ -1,4 +1,5 @@
 ﻿using Apontamento.API.Controllers.Identidade.InputModels;
+using Apontamento.Identidade.Domain.Commands.Autenticacao;
 using Apontamento.Identidade.Domain.Commands.Identidade;
 using AutoMapper;
 
@@ -9,6 +10,14 @@ namespace Apontamento.API.Configurations.AutoMapper
         public InputModelToDomainProfile()
         {
             MapeiaContextoIdentidade();
+            MapeiaContextoAutenticacao();
+        }
+
+        private void MapeiaContextoAutenticacao()
+        {
+            CreateMap<LoginInputModel, LoginCommand>()
+                .ForMember(l => l.Email, opt => opt.MapFrom(m => m.Email))
+                .ForMember(l => l.Senha, opt => opt.MapFrom(m => m.Senha));
         }
 
         private void MapeiaContextoIdentidade()

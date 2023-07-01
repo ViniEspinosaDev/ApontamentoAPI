@@ -25,5 +25,10 @@ namespace Apontamento.Identidade.Domain.Entities
         public bool PrimeiroLogin { get; protected set; }
         public DateTime DataCadastro { get; protected set; }
         public bool Desativado { get; protected set; }
+
+        public void AlterarSenha(string senha)
+        {
+            Senha = senha;
+        }
     }
 }

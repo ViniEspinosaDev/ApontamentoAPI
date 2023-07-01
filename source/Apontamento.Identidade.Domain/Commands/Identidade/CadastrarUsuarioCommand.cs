@@ -47,6 +47,10 @@ namespace Apontamento.Identidade.Domain.Commands.Identidade
             RuleFor(c => c.Email)
                 .EmailAddress().WithMessage("O e-mail não é válido")
                 .OverridePropertyName("ValidacaoEmail");
+
+            RuleFor(c => c.Nome)
+                .NotEqual("manager").WithMessage("Não é possível criar um usuário com o nome 'manager'.")
+                .OverridePropertyName("ValidacaoNomeManager");
         }
     }
 }

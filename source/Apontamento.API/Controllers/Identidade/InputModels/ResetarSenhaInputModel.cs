@@ -1,7 +1,12 @@
-﻿namespace Apontamento.API.Controllers.Identidade.InputModels
+﻿using AutoMapper.Configuration.Annotations;
+
+namespace Apontamento.API.Controllers.Identidade.InputModels
 {
     public class ResetarSenhaInputModel
     {
-        public string IdUsuario { get; set; }
+        [Ignore]
+        public Guid UsuarioId { get; set; }
+        public string Senha { get; set; }
+        public string ConfirmacaoSenha { get; set; }
     }
 }
