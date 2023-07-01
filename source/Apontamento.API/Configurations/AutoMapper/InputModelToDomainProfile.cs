@@ -15,7 +15,7 @@ namespace Apontamento.API.Configurations.AutoMapper
         {
             CreateMap<CadastroUsuarioInputModel, CadastrarUsuarioCommand>()
                 .ForMember(c => c.Nome, opt => opt.MapFrom(m => m.Nome))
-                .ForMember(c => c.SquadId, opt => opt.MapFrom(m => m.Squad))
+                .ForMember(c => c.SquadId, opt => opt.MapFrom(m => m.SquadId))
                 .ForMember(c => c.TipoUsuario, opt => opt.MapFrom(m => m.TipoUsuario))
                 .ForMember(c => c.Email, opt => opt.MapFrom(m => m.Email));
         }

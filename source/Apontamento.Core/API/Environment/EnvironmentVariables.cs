@@ -39,10 +39,10 @@ namespace Apontamento.Core.API.Environment
         {
             get
             {
-                if (Desenvolvimento)
+                //if (Desenvolvimento)
                     return _connectionStringsConfiguration.SqlConnection;
 
-                return $"Server={SQL_Servidor}; Initial Catalog={SQL_NomeBD}; User={SQL_Usuario}; Password={SQL_Senha}; MultipleActiveResultSets=True; Application Name={SQL_NomeAPP}";
+                //return $"Server={SQL_Servidor}; Initial Catalog={SQL_NomeBD}; User={SQL_Usuario}; Password={SQL_Senha}; MultipleActiveResultSets=True; Application Name={SQL_NomeAPP}";
             }
         }
 
@@ -50,18 +50,18 @@ namespace Apontamento.Core.API.Environment
         {
             get
             {
-                if (Desenvolvimento)
+                //if (Desenvolvimento)
                     return _mailConfiguration;
 
-                return new MailConfiguration()
-                {
-                    SMTP = MAIL_SMTP,
-                    Port = int.Parse(MAIL_Porta),
-                    Address = MAIL_Endereco,
-                    Password = MAIL_Senha,
-                    SandBox = true,
-                    UseSsl = bool.Parse(MAIL_UsarSSL)
-                };
+                //return new MailConfiguration()
+                //{
+                //    SMTP = MAIL_SMTP,
+                //    Port = int.Parse(MAIL_Porta),
+                //    Address = MAIL_Endereco,
+                //    Password = MAIL_Senha,
+                //    SandBox = true,
+                //    UseSsl = bool.Parse(MAIL_UsarSSL)
+                //};
             }
         }
 

@@ -29,7 +29,11 @@ namespace Apontamento.Identidade.CrossCuttingIoC
 
         private static void ConfigurarDependenciasBancoDados(IServiceCollection services)
         {
-            services.AddDbContext<IdentidadeContext>(options => options.UseSqlServer(_environment.ConexaoSQL));
+            services
+                .AddDbContext<IdentidadeContext>(options =>
+                    options.UseSqlServer(_environment.ConexaoSQL, options =>
+                        options.EnableRetryOnFailure(maxRetryCount: 2, maxRetryDelay: TimeSpan.FromSeconds(3), errorNumbersToAdd: null)
+                        .MigrationsHistoryTable("EFMigrations")));
         }
 
         private static void ConfigurarDependenciasEvent(IServiceCollection services)

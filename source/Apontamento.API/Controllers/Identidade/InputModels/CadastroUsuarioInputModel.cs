@@ -3,7 +3,7 @@
     public class CadastroUsuarioInputModel
     {
         public string Nome { get; set; }
-        public string Squad { get; set; }
+        public Guid SquadId { get; set; }
         public int TipoUsuario { get; set; }
         public string Email { get; set; }
     }

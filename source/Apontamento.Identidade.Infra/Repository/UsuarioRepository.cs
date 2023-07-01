@@ -18,7 +18,7 @@ namespace Apontamento.Identidade.Infra.Repository
 
         public void Adicionar(Usuario usuario)
         {
-            _identidadeContext.Add(usuario);
+            _identidadeContext.Usuario.Add(usuario);
         }
 
         public void Dispose()

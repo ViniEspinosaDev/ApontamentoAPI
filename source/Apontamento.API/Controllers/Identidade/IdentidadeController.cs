@@ -27,14 +27,16 @@ namespace Apontamento.API.Controllers.Identidade
             _mapper = mapper;
         }
 
+        // TODO: Remover o AllowAnounymous
+        [AllowAnonymous]
         [HttpPost("cadastrar-usuario")]
         public async Task<ActionResult> CadastrarUsuario(CadastroUsuarioInputModel cadastroUsuarioInputModel)
         {
-            if (!AcessoSuperiorAoDev)
-            {
-                NotifyError("-1", "Acesso deve ser superior ao desenvolvedor");
-                return CustomResponse();
-            }
+            //if (!AcessoSuperiorAoDev)
+            //{
+            //    NotifyError("-1", "É necessário um nível de acesso superior");
+            //    return CustomResponse();
+            //}
 
             var comando = _mapper.Map<CadastrarUsuarioCommand>(cadastroUsuarioInputModel);
 
@@ -42,9 +44,11 @@ namespace Apontamento.API.Controllers.Identidade
 
             string mensagem = $"Usuário criado com sucesso";
 
-            return CustomResponse();
+            return CustomResponse(mensagem);
         }
 
+        // TODO: Remover o AllowAnounymous
+        [AllowAnonymous]
         [HttpPut("resetar-senha")]
         public async Task<ActionResult> ResetarSenha(ResetarSenhaInputModel resetarSenhaInputModel)
         {
