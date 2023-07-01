@@ -1,5 +1,4 @@
-﻿using Apontamento.Core.API.Environment;
-using Apontamento.Core.Data;
+﻿using Apontamento.Core.Data;
 using Apontamento.Identidade.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,20 +6,20 @@ namespace Apontamento.Identidade.Infra.Context
 {
     public class IdentidadeContext : DbContext, IUnitOfWork
     {
-        public IdentidadeContext()
-        {
-            
-        }
+        private const string ConnectionString = "Server=localhost,1433;Database=ApontamentoDB;User ID=sa;Password=1q2w3e4r@#$;Trusted_Connection=False; TrustServerCertificate=True; Application Name=Apontamento";
 
-        public IdentidadeContext(DbContextOptions<IdentidadeContext> options) : base(options) {}
+        public IdentidadeContext() { }
+
+        public IdentidadeContext(DbContextOptions<IdentidadeContext> options) : base(options) { }
 
         public DbSet<Usuario> Usuario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost,1433;Database=ApontamentoDB;User ID=sa;Password=1q2w3e4r@#$;Trusted_Connection=False; TrustServerCertificate=True; Application Name=Apontamento", options =>
-                        options.EnableRetryOnFailure(maxRetryCount: 2, maxRetryDelay: TimeSpan.FromSeconds(3), errorNumbersToAdd: null)
-                        .MigrationsHistoryTable("EFMigrations"));
+            optionsBuilder
+                .UseSqlServer(ConnectionString, options => options
+                .EnableRetryOnFailure(maxRetryCount: 2, maxRetryDelay: TimeSpan.FromSeconds(3), errorNumbersToAdd: null)
+                .MigrationsHistoryTable("EFMigrations"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
